@@ -2,19 +2,33 @@ package main
 
 import (
 	"github.com/breadleaf/goscript/internal/lexer"
+	"fmt"
+	"os"
+	"io/ioutil"
+	"strings"
 )
 
-func Execute(program []string) {
-	l := lexer.NewLexer(program)
+func main() {
+	if len(os.Args) < 2 {
+		usage()
+		os.Exit(1)
+	}
+
+	filename := os.Args[1]
+
+	data, err := ioutil.ReadFile(filename)
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+
+	text := string(data)
+	lines := strings.Split(text, "\n")
+
+	l := lexer.NewLexer(lines)
 	l.Lex()
 }
 
-func main() {
-	program := []string{
-		"var a = 1",
-		"var b = 2",
-		"var c = a + b",
-	}
-
-	Execute(program)
+func usage() {
+	fmt.Printf("Usage: %s <filename>\n", os.Args[0])
 }
