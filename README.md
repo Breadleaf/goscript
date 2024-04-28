@@ -7,3 +7,9 @@ Go script is a scripting language with a standalone cli tool or can be used as a
 ```bash
 go test -v ./internal/...
 ```
+
+## Compile CLI Tool
+
+```bash
+cd cmd && go build
+```
