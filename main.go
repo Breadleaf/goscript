@@ -1,9 +1,10 @@
 package goscript
 
 import (
-	"fmt"
+	"github.com/breadleaf/goscript/internal/lexer"
 )
 
-func Hello() {
-	fmt.Println("Hello from goscript")
+func Execute(program []string) {
+	l := lexer.NewLexer(program)
+	l.Lex()
 }
